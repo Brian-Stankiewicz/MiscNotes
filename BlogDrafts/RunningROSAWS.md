@@ -8,4 +8,4 @@
 
 ### Setting up a UI
 
-1. (Ubuntu Desktop AWS Windows)[https://aws.amazon.com/premiumsupport/knowledge-center/connect-to-ubuntu-1604-windows/]
+1. [Ubuntu Desktop AWS Windows](https://aws.amazon.com/premiumsupport/knowledge-center/connect-to-ubuntu-1604-windows/)
