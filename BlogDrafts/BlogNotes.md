@@ -3,3 +3,4 @@
 - Deep Learning Materials
   - Deep Learning Dojo
 - Gaming with your kids.
+- AI Dangers (http://doyoutrustthiscomputer.org/watch)
