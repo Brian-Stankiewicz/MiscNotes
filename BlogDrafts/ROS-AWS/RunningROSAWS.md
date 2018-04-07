@@ -29,12 +29,14 @@
 
 6. Type vi .vnc/xstartup and modify the file
 
-`#!/bin/sh
+```bash
+#!/bin/sh
 # Uncomment the following two lines for normal desktop:
 unset SESSION_MANAGER
 # exec /etc/X11/xinit/xinitrc
 gnome-session –session=gnome-classic &
-gnome-panel&`
+gnome-panel&
+```
 
 7. Press ESC, followed by :wq to save and exit the file
 
