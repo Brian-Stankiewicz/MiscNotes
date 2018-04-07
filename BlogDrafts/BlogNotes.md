@@ -1,1 +1,5 @@
-- Education in the near future.
+- Education in the near future-the role and acceptance of on-line courses.
+- The future of parenting with self-driving cars (SDCs)
+- Deep Learning Materials
+  - Deep Learning Dojo
+- Gaming with your kids.
