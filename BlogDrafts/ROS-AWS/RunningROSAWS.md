@@ -1,53 +1,23 @@
-# Running Robot Operating (ROS) System on AWS
+# Running Robot Operating (ROS) System on AWS EC2
 
-## Tutorials
+I spent a Sunday morning figuring out how to run Robot Operating System on AWS EC2. Here are the basic steps and the references to get it working. I've gone through these steps probably about 10 times today and it takes about 5 minutes to set up an instance and configure it.
 
-1. [YouTube Tutorial](https://www.youtube.com/watch?v=9U6GDonGFHw)
+One of my weekend challenges is to understand how to use Docker better. I might make a "container" or "Docker Image" for ROS. If I do, I will put the reference here.
 
-## AWS
+## Installation
+1. Install Ubuntu-16.04 AMI (current stable Ubuntu version)
+![Ubuntu AMI](http://www.sequentropy.com/wp-content/uploads/2018/04/EC2-AMI.jpg)
+2. Follow the instructions on how to configure your [Ubuntu Instance for Desktop Access](http://brianstankiewicz.com/2018/04/07/tutorial-connecting-to-aws-ec2-ubuntu-desktop/)
+2. Install [ROS Kintetic](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+  * Do the [ROS Installation](http://wiki.ros.org/kinetic/Installation/Ubuntu) using the remote desktop.
+3. Work through [ROS tutorials](http://wiki.ros.org/ROS/Tutorials)
+  * Do the [ROS tutorials](http://wiki.ros.org/ROS/Tutorials) using the remote desktop.
+  * Here is the first [ROS Tutorial](http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics) in the series that has something that will display.
+![ROS on AWS EC2](http://www.sequentropy.com/wp-content/uploads/2018/04/ROS-EC2-DemoRunning.jpg)
 
-### Setting up a UI
-1. [Connect to AWS EC2 using PUTTY](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html?icmpid=docs_ec2_console)
+## Issues
 
-
-1. [Ubuntu Desktop AWS Windows](https://aws.amazon.com/premiumsupport/knowledge-center/connect-to-ubuntu-1604-windows/)
-
-[YouTub Video](https://www.youtube.com/watch?v=ljvgwmJCUjw)
-
-1. Connect ssh to ec2 instance.
-
-2. Become the super user after executing the command sudo -s
-
-3. Type the following commands to install vncserver:
-  * sudo apt-get install ubuntu-desktop
-  * sudo apt-get install vnc4server
-  * sudo apt-get install gnome-panel
-
-4. Type the command vncserver once.
-
-5. Remember the password you use for accessing the vncserver. Kill vncserver by typing the command vncserver -kill :1
-
-6. Type vi .vnc/xstartup and modify the file
-
-```bash
-#!/bin/sh
-# Uncomment the following two lines for normal desktop:
-unset SESSION_MANAGER
-# exec /etc/X11/xinit/xinitrc
-gnome-session –session=gnome-classic &
-gnome-panel&
-```
-
-7. Press ESC, followed by :wq to save and exit the file
-
-8. Type vncserver again to start vncserver.
-
-9. Download and install [tightvnc](ttp://www.tightvnc.com/download.php) to connect remote desktop.
-
-10. Now run tightvnc viewer
-
-11. Add the port no 5901 in your ec2 security group
-
-12. Write your public ip in remote host text box and port no. <publicIp>::5901
-
-13. Your desktop in ec2 instance is ready and execute the command vncserver after every restart.
+* I had an issue with ```roscore```. However, I was able to do the rest of the tutorials.
+* I tried to install and run the [ROS Turtlebot](http://wiki.ros.org/turtlebot/Tutorials/indigo/Turtlebot%20Installation) but I couldn't get it running. Here is what I found out.
+  * Turtlebot requires [ROS Indigo](http://wiki.ros.org/indigo/Installation/Ubuntu)
+  * [ROS Indigo](http://wiki.ros.org/indigo/Installation/Ubuntu) requires Ubuntu Tasty. However, I couldn't get Ubuntu-Trusty, ROS-Indigo, and Remote Desktop to all work together.
