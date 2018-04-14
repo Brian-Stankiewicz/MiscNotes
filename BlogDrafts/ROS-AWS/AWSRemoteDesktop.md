@@ -83,4 +83,4 @@ vncserver
 
 ## FAQ
 
-* `Can I stop my machine and restart it?`: `Yes`. However you will have to re-run the ```vncserver``` command after restarting the server.
+* **Can I stop my machine and restart it?**: **Yes**. However you will have to re-run the ```vncserver``` command after restarting the server.
