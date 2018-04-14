@@ -1,33 +1,54 @@
-# Running Robot Operating (ROS) System on AWS
+I spent a Saturday morning trying to connect to an AWS EC2 desktop after trying to follow the instructions given by AWS on [Connecting to Ubuntu Desktop with Windows](https://aws.amazon.com/premiumsupport/knowledge-center/connect-to-ubuntu-1604-windows/) that completely failed.
 
-## Tutorials
+The instructions described here are derived from the following <a href="https://www.youtube.com/watch?v=ljvgwmJCUjw">YouTube Video</a>. There were some parts that were not clear/correct so I have clarified and corrected them in this post.
 
-1. [YouTube Tutorial](https://www.youtube.com/watch?v=9U6GDonGFHw)
+## Configure Ubuntu Desktop Server
+* Connect ssh to ec2 instance using PUTTY.
+	* See [How to Connect to AWS EC2 using Putty](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html). (I used this method and it works just fine)
+*  Become the super user by executing the command
 
-## AWS
+```bash
+sudo -s
+```
 
-### Setting up a UI
-1. [Connect to AWS EC2 using PUTTY](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html?icmpid=docs_ec2_console)
+* Update the operating system
 
+```bash
+sudo apt update && sudo apt upgrade
+```
 
-1. [Ubuntu Desktop AWS Windows](https://aws.amazon.com/premiumsupport/knowledge-center/connect-to-ubuntu-1604-windows/)
+* Type the following commands to install vncserver:
 
-[YouTub Video](https://www.youtube.com/watch?v=ljvgwmJCUjw)
+```bash
+sudo apt-get install ubuntu-desktop
+```
 
-1. Connect ssh to ec2 instance.
+```bash
+sudo apt-get install vnc4server
+```
 
-2. Become the super user after executing the command sudo -s
+```bash
+sudo apt-get install gnome-panel
+```
 
-3. Type the following commands to install vncserver:
-  * sudo apt-get install ubuntu-desktop
-  * sudo apt-get install vnc4server
-  * sudo apt-get install gnome-panel
+* Start the VNCServer.
+```bash
+vncserver
+```
+* Remember the password you set. You will need this passcode later when you connect using [tightvnc](http://www.tightvnc.com/) .
+* Kill vncserver
 
-4. Type the command vncserver once.
+```bash
+vncserver -kill :1
+```
 
-5. Remember the password you use for accessing the vncserver. Kill vncserver by typing the command vncserver -kill :1
+* Modify the VNC startup script
 
-6. Type vi .vnc/xstartup and modify the file
+```bash
+vi .vnc/xstartup
+```
+
+* Add the following lines to the .vnc/xstartup script
 
 ```bash
 #!/bin/sh
@@ -38,16 +59,28 @@ gnome-session –session=gnome-classic &
 gnome-panel&
 ```
 
-7. Press ESC, followed by :wq to save and exit the file
+![xstartup script](http://www.sequentropy.com/wp-content/uploads/2018/04/Edit-XStartupScript.jpg)
 
-8. Type vncserver again to start vncserver.
+* Press ESC, followed by <code>:wq</code> (write-quit) to save and exit the file
+* Start the VNCServer again
+```bash
+vncserver
+```
 
-9. Download and install [tightvnc](ttp://www.tightvnc.com/download.php) to connect remote desktop.
+## Configure your Windows Box
+* Download and install [tightvnc](http://www.tightvnc.com/download.php) to connect remote desktop.
+* Run [tightvnc](http://www.tightvnc.com/) viewer
 
-10. Now run tightvnc viewer
+## Configure your EC2 Instance
 
-11. Add the port no 5901 in your ec2 security group
+* Edit your security group.
+![Edit your Security Group](http://sequentropy.com/wp-content/uploads/2018/04/SecurityGroup-LaunchWizard.jpg)
+* Add  port number <strong>5901</strong> in your ec2 security group
+![Add Port 5901 to security group](http://sequentropy.com/wp-content/uploads/2018/04/EditSecurityGroup.jpg)
+* Write your public ip number (or DNS name) in remote host text box and port number ```<publicIp>::5901```
+![TightVNC](http://sequentropy.com/wp-content/uploads/2018/04/TightVNC-Connect.jpg)
+* Your desktop in ec2 instance is ready and execute the command vncserver after every restart.
 
-12. Write your public ip in remote host text box and port no. <publicIp>::5901
+## FAQ
 
-13. Your desktop in ec2 instance is ready and execute the command vncserver after every restart.
+* `Can I stop my machine and restart it?`: `Yes`. However you will have to re-run the ```vncserver``` command after restarting the server.
