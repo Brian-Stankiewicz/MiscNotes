@@ -21,3 +21,8 @@ One of my weekend challenges is to understand how to use Docker better. I might 
 * I tried to install and run the [ROS Turtlebot](http://wiki.ros.org/turtlebot/Tutorials/indigo/Turtlebot%20Installation) but I couldn't get it running. Here is what I found out.
   * Turtlebot requires [ROS Indigo](http://wiki.ros.org/indigo/Installation/Ubuntu)
   * [ROS Indigo](http://wiki.ros.org/indigo/Installation/Ubuntu) requires Ubuntu Tasty. However, I couldn't get Ubuntu-Trusty, ROS-Indigo, and Remote Desktop to all work together.
+
+## Notes
+
+* Installing [ROS with graphics acceleration](https://github.com/yrahal/ec2-setup)
+* [Dev environment](https://github.com/yrahal/dev-machine) with graphics acceleration
